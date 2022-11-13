@@ -1,4 +1,4 @@
-package com.example.globantpersonalproject.application.repositories;
+package com.example.globantpersonalproject.infrastructure.repositories;
 
 import com.example.globantpersonalproject.domain.entities.Movie;
 import java.util.Optional;

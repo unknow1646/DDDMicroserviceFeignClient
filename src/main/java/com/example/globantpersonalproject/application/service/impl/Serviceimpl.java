@@ -1,13 +1,11 @@
 package com.example.globantpersonalproject.application.service.impl;
 
 import com.example.globantpersonalproject.application.mapper.ConverterMovie;
-import com.example.globantpersonalproject.application.repositories.DataRepository;
+import com.example.globantpersonalproject.infrastructure.repositories.DataRepository;
 import com.example.globantpersonalproject.application.service.ServiceRepository;
 import com.example.globantpersonalproject.domain.dto.MovieDto;
 import com.example.globantpersonalproject.domain.entities.Movie;
-import java.util.Collection;
 import java.util.Optional;
-import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

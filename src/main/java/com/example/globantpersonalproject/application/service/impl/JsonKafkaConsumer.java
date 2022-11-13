@@ -1,6 +1,6 @@
 package com.example.globantpersonalproject.application.service.impl;
 
-import com.example.globantpersonalproject.application.repositories.DataRepository;
+import com.example.globantpersonalproject.infrastructure.repositories.DataRepository;
 import com.example.globantpersonalproject.domain.entities.Movie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
