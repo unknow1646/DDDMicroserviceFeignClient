@@ -14,6 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class MovieDto {
+
   public String title;
   public String year;
   public String rated;

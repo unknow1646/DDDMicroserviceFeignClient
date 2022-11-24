@@ -1,6 +1,6 @@
-package com.example.globantpersonalproject.application.service.impl;
+package com.example.globantpersonalproject.domain.service.impl;
 
-import com.example.globantpersonalproject.infrastructure.repositories.DataRepository;
+import com.example.globantpersonalproject.infrastructure.repositories.MovieDataRepository;
 import com.example.globantpersonalproject.domain.entities.Movie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,19 +21,19 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class JsonKafkaConsumer {
+public class MovieConsumerImpl {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(JsonKafkaConsumer.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MovieConsumerImpl.class);
 
-  DataRepository dataRepository;
+  MovieDataRepository movieDataRepository;
 
   @Autowired
-  public JsonKafkaConsumer(DataRepository dataRepository) {
-    this.dataRepository = dataRepository;
+  public MovieConsumerImpl(MovieDataRepository movieDataRepository) {
+    this.movieDataRepository = movieDataRepository;
   }
 
   @KafkaListener(topics = "java", groupId = "myGroup")
-  public void consume(Movie movie){
+  public void consume(Movie movie) {
 
     LOGGER.info(String.format("MESSAGE RECiEVED -> %S ", movie.toString()));
 

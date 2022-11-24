@@ -9,17 +9,14 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaTopicConfig {
 
   @Bean
-  public NewTopic javaGuidesTopic(){
+  public NewTopic javaGuidesTopic() {
     return TopicBuilder.name("javaguides")
         .build();
   }
 
   @Bean
-  public NewTopic javaTopic(){
+  public NewTopic javaTopic() {
     return TopicBuilder.name("java")
         .build();
   }
-
-
-
 }

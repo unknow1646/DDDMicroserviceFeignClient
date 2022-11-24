@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DataRepository extends JpaRepository<Movie, Long> {
+public interface MovieDataRepository extends JpaRepository<Movie, Long> {
 
-  Optional<Movie> findByTitle (String movieTitle);
+  Optional<Movie> findByTitle(String movieTitle);
 
 }

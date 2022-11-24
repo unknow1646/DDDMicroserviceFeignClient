@@ -8,12 +8,12 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableConfigurationProperties(KafkaProperties.class)
-@SpringBootApplication(exclude={KafkaAutoConfiguration.class})
+@SpringBootApplication(exclude = {KafkaAutoConfiguration.class})
 @EnableFeignClients
 public class GlobantpersonalprojectApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GlobantpersonalprojectApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(GlobantpersonalprojectApplication.class, args);
+  }
 
 }

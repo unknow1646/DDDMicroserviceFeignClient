@@ -1,9 +1,8 @@
-package com.example.globantpersonalproject.application.mapper;
+package com.example.globantpersonalproject.domain.mapper;
 
 import com.example.globantpersonalproject.domain.dto.MovieDto;
 import com.example.globantpersonalproject.domain.dto.RatingMovieDto;
 import com.example.globantpersonalproject.domain.entities.Movie;
-import com.example.globantpersonalproject.domain.entities.Rating;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-public class ConverterMovie implements Converter<Optional<Movie>, MovieDto> {
+public class MovieConverter implements Converter<Optional<Movie>, MovieDto> {
 
   @Override
   public MovieDto convert(Optional<Movie> movie) {
@@ -28,7 +27,7 @@ public class ConverterMovie implements Converter<Optional<Movie>, MovieDto> {
         .orElseThrow();
   }
 
-  private List<RatingMovieDto> mapRatingList(Movie movie){
+  private List<RatingMovieDto> mapRatingList(Movie movie) {
     return Optional.ofNullable(movie)
         .map(Movie::getRatingList).stream()
         .flatMap(Collection::parallelStream)

@@ -1,4 +1,4 @@
-package com.example.globantpersonalproject.application.service.impl;
+package com.example.globantpersonalproject.domain.service.impl;
 
 /*
  * Copyright 2021 MonetaGo, Inc. All Rights Reserved.
@@ -13,6 +13,7 @@ package com.example.globantpersonalproject.application.service.impl;
  */
 
 import com.example.globantpersonalproject.domain.entities.Movie;
+import com.example.globantpersonalproject.domain.service.MovieProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +24,19 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JsonKafkaProducer {
+public class MovieProducerImpl implements MovieProducer {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(JsonKafkaProducer.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MovieProducerImpl.class);
   private KafkaTemplate<String, Movie> userKafkaTemplate;
 
   @Autowired
-  public JsonKafkaProducer(
+  public MovieProducerImpl(
       KafkaTemplate<String, Movie> kafkaTemplate) {
     this.userKafkaTemplate = kafkaTemplate;
   }
 
-  public void sendMessage(Movie movie){
+  @Override
+  public void sendMessage(Movie movie) {
 
     LOGGER.info(String.format("MESSAGE SENT -> %S ", movie.toString()));
 

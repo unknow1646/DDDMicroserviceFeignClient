@@ -1,11 +1,13 @@
-package com.example.globantpersonalproject.application.service.impl;
+package com.example.globantpersonalproject.domain.service.impl;
 
-import com.example.globantpersonalproject.application.mapper.ConverterMovie;
-import com.example.globantpersonalproject.infrastructure.repositories.DataRepository;
-import com.example.globantpersonalproject.application.service.ServiceRepository;
 import com.example.globantpersonalproject.domain.dto.MovieDto;
 import com.example.globantpersonalproject.domain.entities.Movie;
+import com.example.globantpersonalproject.domain.mapper.MovieConverter;
+import com.example.globantpersonalproject.domain.service.MovieRepository;
+import com.example.globantpersonalproject.infrastructure.repositories.MovieDataRepository;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,27 +24,32 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class Serviceimpl implements ServiceRepository {
+public class Serviceimpl implements MovieRepository {
 
-  DataRepository dataRepository;
-  ConverterMovie converterMovie;
+  MovieDataRepository movieDataRepository;
+  MovieConverter converterMovie;
 
   @Autowired
-  public Serviceimpl(DataRepository dataRepository, ConverterMovie converterMovie) {
-    this.dataRepository = dataRepository;
+  public Serviceimpl(MovieDataRepository movieDataRepository, MovieConverter converterMovie) {
+    this.movieDataRepository = movieDataRepository;
     this.converterMovie = converterMovie;
   }
 
   @Override
-  public void create(Movie user) {
-
-    user.setMovieId("AAAAAAAAAAA");
-    dataRepository.save(user);
+  public MovieDto getMovie(String movieTitle) {
+    Optional<Movie> movie = movieDataRepository.findByTitle(movieTitle);
+    return converterMovie.convert(movie);
   }
 
   @Override
-  public MovieDto getMovie(String movieTitle) {
-    Optional<Movie> movie = dataRepository.findByTitle(movieTitle);
-    return converterMovie.convert(movie);
+  public List<MovieDto> getAllMovies() {
+
+    List<Movie> allMovies = movieDataRepository.findAll();
+    return allMovies
+        .stream()
+        .map(movie -> converterMovie.convert(Optional.ofNullable(movie)))
+        .collect(Collectors.toList());
   }
+
+
 }

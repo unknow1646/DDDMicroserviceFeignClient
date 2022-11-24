@@ -39,6 +39,7 @@ public class KafkaConsumerConfig {
     props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, Movie.class);
     return new DefaultKafkaConsumerFactory<>(props);
   }
+
   @Bean
   KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, Movie>>
   kafkaListenerContainerFactory() {

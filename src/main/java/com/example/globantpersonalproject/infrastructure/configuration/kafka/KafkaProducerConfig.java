@@ -21,9 +21,9 @@ public class KafkaProducerConfig {
   private String bootstrapServers;
 
   @Bean
-  public ProducerFactory<String, Movie> producerFactory(){
-    Map<String,Object> config = new HashMap<>();
-    config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapServers);
+  public ProducerFactory<String, Movie> producerFactory() {
+    Map<String, Object> config = new HashMap<>();
+    config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
     config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
     config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
     return new DefaultKafkaProducerFactory(config);
@@ -31,7 +31,7 @@ public class KafkaProducerConfig {
 
   @Bean
   @Qualifier("A")
-  public KafkaTemplate<String, Movie> userKafkaTemplate(){
+  public KafkaTemplate<String, Movie> userKafkaTemplate() {
     return new KafkaTemplate<>(producerFactory());
   }
 
