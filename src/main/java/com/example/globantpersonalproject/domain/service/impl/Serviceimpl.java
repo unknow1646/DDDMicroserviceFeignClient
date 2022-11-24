@@ -50,6 +50,4 @@ public class Serviceimpl implements MovieRepository {
         .map(movie -> converterMovie.convert(Optional.ofNullable(movie)))
         .collect(Collectors.toList());
   }
-
-
 }
