@@ -7,11 +7,12 @@ import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.PropertySource;
 
 @EnableConfigurationProperties(KafkaProperties.class)
 @SpringBootApplication(exclude = {KafkaAutoConfiguration.class})
 @EnableFeignClients
-public class GlobantpersonalprojectApplication {
+@PropertySource(name = "myProperties", value = "application.properties")public class GlobantpersonalprojectApplication {
 
   public static void main(String[] args) {
 

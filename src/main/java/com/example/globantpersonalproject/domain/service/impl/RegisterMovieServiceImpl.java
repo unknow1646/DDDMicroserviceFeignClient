@@ -20,6 +20,9 @@ public class RegisterMovieServiceImpl implements RegisterMovieService {
 
   private static String API_KEY = "5ce0471d";
 
+  //@Value("${token}")
+  //private String apiKey;
+
   @Autowired
   FeignServiceClient feignServiceClient;
   MovieDataRepository movieDataRepository;
