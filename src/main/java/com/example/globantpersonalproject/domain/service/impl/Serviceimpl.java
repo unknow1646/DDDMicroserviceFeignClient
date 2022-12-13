@@ -4,11 +4,13 @@ import com.example.globantpersonalproject.domain.dto.MovieDto;
 import com.example.globantpersonalproject.domain.entities.Movie;
 import com.example.globantpersonalproject.domain.mapper.MovieConverter;
 import com.example.globantpersonalproject.domain.service.MovieRepository;
+import com.example.globantpersonalproject.infrastructure.repositories.MovieDataRedisRepository;
 import com.example.globantpersonalproject.infrastructure.repositories.MovieDataRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /*
@@ -28,26 +30,25 @@ public class Serviceimpl implements MovieRepository {
 
   MovieDataRepository movieDataRepository;
   MovieConverter converterMovie;
+  MovieDataRedisRepository movieDataRedisRepository;
 
   @Autowired
-  public Serviceimpl(MovieDataRepository movieDataRepository, MovieConverter converterMovie) {
+  public Serviceimpl(MovieDataRepository movieDataRepository, MovieConverter converterMovie, MovieDataRedisRepository movieDataRedisRepository) {
     this.movieDataRepository = movieDataRepository;
     this.converterMovie = converterMovie;
+    this.movieDataRedisRepository = movieDataRedisRepository;
   }
 
   @Override
-  public MovieDto getMovie(String movieTitle) {
-    Optional<Movie> movie = movieDataRepository.findByTitle(movieTitle);
-    return converterMovie.convert(movie);
-  }
-
-  @Override
+  @Cacheable("movies")
   public List<MovieDto> getAllMovies() {
-
-    List<Movie> allMovies = movieDataRepository.findAll();
+    System.out.println("Calling get service ...");
+    List<Movie> allMovies = movieDataRedisRepository.findAll();
     return allMovies
         .stream()
         .map(movie -> converterMovie.convert(Optional.ofNullable(movie)))
         .collect(Collectors.toList());
   }
 }
+
+

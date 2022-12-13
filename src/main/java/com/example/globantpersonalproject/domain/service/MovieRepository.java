@@ -5,8 +5,6 @@ import java.util.List;
 
 public interface MovieRepository {
 
-  MovieDto getMovie(String movieTitlle);
-
   List<MovieDto> getAllMovies();
 
 }

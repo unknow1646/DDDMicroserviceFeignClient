@@ -1,108 +1,98 @@
-package com.example.globantpersonalproject.domain.entities;
+package com.example.globantpersonalproject.domain.entities.redisentity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
-
-@Builder
-@NoArgsConstructor
+import org.springframework.data.redis.core.RedisHash;
+/*
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class Movie implements Serializable {
+public class MovieRedisEntity implements Serializable {
 
   private static final long serialVersionUID = 2675048832069117586L;
 
-  @Column(nullable = false)
+ 
   private String movieId;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @Column(nullable = false)
+ 
   @JsonProperty("Title")
   public String title;
-  @Column(nullable = false)
+ 
   @JsonProperty("Year")
   public String year;
-  @Column(nullable = false)
+ 
   @JsonProperty("Rated")
   public String rated;
-  @Column(nullable = false)
+ 
   @JsonProperty("Released")
   public String released;
-  @Column(nullable = false)
+ 
   @JsonProperty("Runtime")
   public String runtime;
-  @Column(nullable = false)
+ 
   @JsonProperty("Genre")
   public String genre;
-  @Column(nullable = false)
+ 
   @JsonProperty("Director")
   public String director;
-  @Column(nullable = false)
+ 
   @JsonProperty("Writer")
   public String writer;
-  @Column(nullable = false)
+ 
   @JsonProperty("Actors")
   public String actors;
-  @Column(nullable = false)
+ 
   @JsonProperty("Plot")
   public String plot;
-  @Column(nullable = false)
+ 
   @JsonProperty("Language")
   public String language;
-  @Column(nullable = false)
+ 
   @JsonProperty("Country")
   public String country;
-  @Column(nullable = false)
+ 
   @JsonProperty("Awards")
   public String awards;
-  @Column(nullable = false)
+ 
   @JsonProperty("Poster")
   public String poster;
-  @Column(nullable = false)
+ 
   @JsonProperty("Ratings")
-  @OneToMany(fetch = FetchType.LAZY,
-      mappedBy = "movie",
-      cascade = CascadeType.ALL)
-  @JsonManagedReference
-  public List<Rating> ratingList = new ArrayList<>();
-  @Column(nullable = false)
+
+  public List<RatingRedisEntity> ratingList = new ArrayList<>();
   @JsonProperty("Metascore")
   public String metascore;
   public String imdbRating;
   public String imdbVotes;
   public String imdbID;
-  @Column(nullable = false)
+ 
   @JsonProperty("Type")
   public String type;
-  @Column(nullable = false)
+ 
   @JsonProperty("DVD")
   public String dVD;
-  @Column(nullable = false)
+ 
   @JsonProperty("BoxOffice")
   public String boxOffice;
-  @Column(nullable = false)
+ 
   @JsonProperty("Production")
   public String production;
-  @Column(nullable = false)
+ 
   @JsonProperty("Website")
   public String website;
-  @Column(nullable = false)
+ 
   @JsonProperty("Response")
   public String response;
 
@@ -138,51 +128,7 @@ public class Movie implements Serializable {
         '}';
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof Movie)) {
-      return false;
-    }
-    Movie movie = (Movie) o;
-    return Objects.equals(getId(), movie.getId()) && Objects
-        .equals(getTitle(), movie.getTitle()) && Objects.equals(getYear(), movie.getYear())
-        && Objects.equals(getRated(), movie.getRated()) && Objects
-        .equals(getReleased(), movie.getReleased()) && Objects
-        .equals(getRuntime(), movie.getRuntime()) && Objects
-        .equals(getGenre(), movie.getGenre()) && Objects
-        .equals(getDirector(), movie.getDirector()) && Objects
-        .equals(getWriter(), movie.getWriter()) && Objects
-        .equals(getActors(), movie.getActors()) && Objects
-        .equals(getPlot(), movie.getPlot()) && Objects
-        .equals(getLanguage(), movie.getLanguage()) && Objects
-        .equals(getCountry(), movie.getCountry()) && Objects
-        .equals(getAwards(), movie.getAwards()) && Objects
-        .equals(getPoster(), movie.getPoster()) && Objects
-        .equals(getRatingList(), movie.getRatingList()) && Objects
-        .equals(getMetascore(), movie.getMetascore()) && Objects
-        .equals(getImdbRating(), movie.getImdbRating()) && Objects
-        .equals(getImdbVotes(), movie.getImdbVotes()) && Objects
-        .equals(getImdbID(), movie.getImdbID()) && Objects
-        .equals(getType(), movie.getType()) && Objects.equals(getdVD(), movie.getdVD())
-        && Objects.equals(getBoxOffice(), movie.getBoxOffice()) && Objects
-        .equals(getProduction(), movie.getProduction()) && Objects
-        .equals(getWebsite(), movie.getWebsite()) && Objects
-        .equals(getResponse(), movie.getResponse());
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects
-        .hash(getId(), getTitle(), getYear(), getRated(), getReleased(), getRuntime(), getGenre(),
-            getDirector(), getWriter(), getActors(), getPlot(), getLanguage(), getCountry(),
-            getAwards(), getPoster(), getRatingList(), getMetascore(), getImdbRating(),
-            getImdbVotes(), getImdbID(), getType(), getdVD(), getBoxOffice(), getProduction(),
-            getWebsite(), getResponse());
-  }
-
+  
   public static long getSerialVersionUID() {
     return serialVersionUID;
   }
@@ -307,15 +253,6 @@ public class Movie implements Serializable {
     this.poster = poster;
   }
 
-  public List<Rating> getRatingList() {
-    return ratingList;
-  }
-
-  public void setRatingList(List<Rating> ratingList) {
-    this.ratingList = ratingList;
-    ratingList.forEach(rating -> rating.setMovie(this));
-  }
-
   public String getMetascore() {
     return metascore;
   }
@@ -404,5 +341,13 @@ public class Movie implements Serializable {
     this.movieId = movieId;
   }
 
-}
 
+  public List<RatingRedisEntity> getRatingList() {
+    return ratingList;
+  }
+
+
+
+
+}
+*/

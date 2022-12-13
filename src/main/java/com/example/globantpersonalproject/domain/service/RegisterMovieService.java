@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 public interface RegisterMovieService {
 
-  MovieDto registerMovie(String movie) throws JsonProcessingException;
+ // MovieDto registerMovie(String movie) throws JsonProcessingException;
+  MovieDto registerRedisMovie(String movie) throws JsonProcessingException;
 
 }

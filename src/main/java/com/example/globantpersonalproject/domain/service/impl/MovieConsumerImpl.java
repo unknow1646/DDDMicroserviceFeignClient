@@ -1,7 +1,7 @@
 package com.example.globantpersonalproject.domain.service.impl;
 
-import com.example.globantpersonalproject.infrastructure.repositories.MovieDataRepository;
 import com.example.globantpersonalproject.domain.entities.Movie;
+import com.example.globantpersonalproject.infrastructure.repositories.MovieDataRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
