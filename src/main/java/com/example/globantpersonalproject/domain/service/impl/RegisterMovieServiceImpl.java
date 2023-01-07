@@ -25,7 +25,6 @@ public class RegisterMovieServiceImpl implements RegisterMovieService {
 
   @Autowired
   FeignServiceClient feignServiceClient;
-  MovieDataRepository movieDataRepository;
   MovieProducer movieProducer;
   MovieConverter movieConverter;
   MovieDataRedisRepository movieDataRedisRepository;
@@ -34,7 +33,6 @@ public class RegisterMovieServiceImpl implements RegisterMovieService {
   public RegisterMovieServiceImpl(MovieProducer movieProducer, MovieDataRepository movieDataRepository,
       MovieConverter movieConverter, MovieDataRedisRepository movieDataRedisRepository) {
     this.movieProducer = movieProducer;
-    this.movieDataRepository = movieDataRepository;
     this.movieConverter = movieConverter;
     this.movieDataRedisRepository = movieDataRedisRepository;
   }
@@ -50,7 +48,6 @@ public class RegisterMovieServiceImpl implements RegisterMovieService {
     movieProducer.sendMessage(movie1);
     movie1.setMovieId("BBB");
     movieDataRedisRepository.save(movie1);
-    MovieDto movieDto = movieConverter.convert(Optional.of(movie1));
-    return movieDto;
+    return movieConverter.convert(Optional.of(movie1));
   }
 }

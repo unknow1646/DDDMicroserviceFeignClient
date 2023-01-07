@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 public class MovieProducerImpl implements MovieProducer {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(MovieProducerImpl.class);
-  private KafkaTemplate<String, Movie> userKafkaTemplate;
+  private final KafkaTemplate<String, Movie> userKafkaTemplate;
 
   @Autowired
   public MovieProducerImpl(

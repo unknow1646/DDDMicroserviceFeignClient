@@ -28,13 +28,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class Serviceimpl implements MovieRepository {
 
-  MovieDataRepository movieDataRepository;
   MovieConverter converterMovie;
   MovieDataRedisRepository movieDataRedisRepository;
 
   @Autowired
-  public Serviceimpl(MovieDataRepository movieDataRepository, MovieConverter converterMovie, MovieDataRedisRepository movieDataRedisRepository) {
-    this.movieDataRepository = movieDataRepository;
+  public Serviceimpl(MovieConverter converterMovie, MovieDataRedisRepository movieDataRedisRepository) {
     this.converterMovie = converterMovie;
     this.movieDataRedisRepository = movieDataRedisRepository;
   }
